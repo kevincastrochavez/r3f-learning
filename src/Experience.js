@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useFrame, extend, useThree } from '@react-three/fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import Custom from './Custom';
 
 function Experience() {
   const cubeRef = useRef(null);
@@ -14,6 +15,12 @@ function Experience() {
     // cubeRef.current.rotation.x += delta;
     // cubeRef.current.rotation.y += delta;
     // groupRef.current.rotation.y += delta;
+    // console.log(state.clock.elapsedTime);
+
+    const angle = state.clock.elapsedTime;
+    state.camera.position.x = Math.sin(angle) * 8;
+    state.camera.position.z = Math.cos(angle) * 8;
+    state.camera.lookAt(0, 0, 0);
   });
 
   return (
@@ -39,6 +46,8 @@ function Experience() {
         <planeGeometry args={[1, 1]} />
         <meshStandardMaterial color='green' />
       </mesh>
+
+      <Custom />
     </>
   );
 }

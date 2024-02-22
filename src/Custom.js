@@ -27,7 +27,7 @@ function Custom() {
 
   return (
     <>
-      <orbitControls args={[camera, gl.domElement]} />
+      {/* <orbitControls args={[camera, gl.domElement]} /> */}
       <mesh>
         <bufferGeometry ref={geometryRef}>
           <bufferAttribute

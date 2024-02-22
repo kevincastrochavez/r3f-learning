@@ -1,13 +1,18 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Experience from './Experience';
-import Custom from './Custom';
 
 function Object3d() {
+  const cameraSettings = {
+    fov: 75,
+    near: 0.1,
+    far: 100,
+    position: [3, 2, 6],
+  };
+
   return (
-    <Canvas>
-      {/* <Experience /> */}
-      <Custom />
+    <Canvas camera={cameraSettings}>
+      <Experience />
     </Canvas>
   );
 }
