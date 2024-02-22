@@ -1,6 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Experience from './Experience';
+import * as THREE from 'three';
 
 function Object3d() {
   const cameraSettings = {
@@ -11,7 +12,13 @@ function Object3d() {
   };
 
   return (
-    <Canvas camera={cameraSettings}>
+    <Canvas
+      gl={{
+        toneMapping: THREE.ACESFilmicToneMapping,
+        outputColorSpace: THREE.SRGBColorSpace,
+      }}
+      camera={cameraSettings}
+    >
       <Experience />
     </Canvas>
   );

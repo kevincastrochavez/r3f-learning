@@ -16,11 +16,11 @@ function Experience() {
     // cubeRef.current.rotation.y += delta;
     // groupRef.current.rotation.y += delta;
     // console.log(state.clock.elapsedTime);
-
-    const angle = state.clock.elapsedTime;
-    state.camera.position.x = Math.sin(angle) * 8;
-    state.camera.position.z = Math.cos(angle) * 8;
-    state.camera.lookAt(0, 0, 0);
+    // CAMERA
+    // const angle = state.clock.elapsedTime;
+    // state.camera.position.x = Math.sin(angle) * 8;
+    // state.camera.position.z = Math.cos(angle) * 8;
+    // state.camera.lookAt(0, 0, 0);
   });
 
   return (
