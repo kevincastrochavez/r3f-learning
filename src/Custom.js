@@ -1,10 +1,16 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { extend, useThree } from '@react-three/fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as THREE from 'three';
 
 function Custom() {
   const verticesCount = 10 * 3;
+  const geometryRef = useRef();
+
+  useEffect(() => {
+    // Included it here since it need to render the JSX first
+    geometryRef.current.computeVertexNormals();
+  }, []);
 
   const { camera, gl } = useThree(); // Used to get the camera and other stuff
   extend({ OrbitControls }); // Since OrbitControls is a class not built in we extend it
@@ -23,7 +29,7 @@ function Custom() {
     <>
       <orbitControls args={[camera, gl.domElement]} />
       <mesh>
-        <bufferGeometry>
+        <bufferGeometry ref={geometryRef}>
           <bufferAttribute
             attach='attributes-position'
             count={verticesCount}
