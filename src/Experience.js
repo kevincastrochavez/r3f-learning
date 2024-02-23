@@ -1,5 +1,9 @@
 import React, { useRef } from 'react';
-import { OrbitControls, TransformControls } from '@react-three/drei';
+import {
+  OrbitControls,
+  PivotControls,
+  TransformControls,
+} from '@react-three/drei';
 
 function Experience() {
   const cubeRef = useRef();
@@ -14,11 +18,13 @@ function Experience() {
       <ambientLight intensity={0.5} />
 
       <group>
-        <mesh ref={sphereRef} position={[-2, -0.5, 0]}>
-          <sphereGeometry args={[0.5, 32, 32]} />
-          <meshStandardMaterial wireframe color='hotpink' />
-        </mesh>
-        <TransformControls object={sphereRef} mode='translate' />
+        <PivotControls anchor={[0, 0, 0]} depthTest={false}>
+          <mesh ref={sphereRef} position={[-2, -0.5, 0]}>
+            <sphereGeometry args={[0.5, 32, 32]} />
+            <meshStandardMaterial wireframe color='hotpink' />
+          </mesh>
+        </PivotControls>
+        {/* <TransformControls object={sphereRef} mode='translate' /> */}
 
         <mesh ref={cubeRef} position={[2, -0.5, 0]}>
           <boxGeometry scale={1.5} />
