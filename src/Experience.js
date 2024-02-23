@@ -9,6 +9,7 @@ import {
   MeshReflectorMaterial,
   useHelper,
   BakeShadows,
+  SoftShadows,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -20,46 +21,47 @@ function Experience() {
   const directionalLightRef = useRef();
   useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
 
-  const { perfVisible } = useControls({
-    perfVisible: true,
-  });
+  // const { perfVisible } = useControls({
+  //   perfVisible: true,
+  // });
 
-  // Every time a value change, it will rerender this component
-  const { position, color, visible } = useControls('cube', {
-    // color: '#ff0000',
-    position: {
-      // value: 3,
-      value: { x: 2, y: 0, z: 0 },
-      // min: -4,
-      // max: 4,
-      step: 0.01,
-      joystick: 'invertY',
-    },
-    color: 'red',
-    visible: true,
-    myInterval: {
-      min: 0,
-      max: 100,
-      value: [4, 30],
-    },
-    clickMe: button(() => {
-      console.log('clicked');
-    }),
-    choice: {
-      options: ['a', 'b', 'c'],
-    },
-    // rotation: { x: 0, y: 0, z: 0 },
-    // scale: 1,
-  });
+  // // Every time a value change, it will rerender this component
+  // const { position, color, visible } = useControls('cube', {
+  //   // color: '#ff0000',
+  //   position: {
+  //     // value: 3,
+  //     value: { x: 2, y: 0, z: 0 },
+  //     // min: -4,
+  //     // max: 4,
+  //     step: 0.01,
+  //     joystick: 'invertY',
+  //   },
+  //   color: 'red',
+  //   visible: true,
+  //   myInterval: {
+  //     min: 0,
+  //     max: 100,
+  //     value: [4, 30],
+  //   },
+  //   clickMe: button(() => {
+  //     console.log('clicked');
+  //   }),
+  //   choice: {
+  //     options: ['a', 'b', 'c'],
+  //   },
+  //   // rotation: { x: 0, y: 0, z: 0 },
+  //   // scale: 1,
+  // });
 
-  const { scale } = useControls('sphere', {
-    scale: 1,
-  });
+  // const { scale } = useControls('sphere', {
+  //   scale: 1,
+  // });
 
   return (
     <>
-      {perfVisible && <Perf position='top-left' />}
-      <BakeShadows />
+      {/* {perfVisible && <Perf position='top-left' />} */}
+      {/* <BakeShadows /> */}
+      <SoftShadows size={50} samples={10} frustum={3.75} rings={11} near={9} />
 
       <OrbitControls makeDefault />
       {/* makeDefault for TransformControls so that the camera does not move when playing  around */}
@@ -87,7 +89,7 @@ function Experience() {
           axisColors={[0xff0000, 0x00ff00, 0x0000ff]}
           scale={2}
         > */}
-        <mesh castShadow ref={sphereRef} position={[-2, -0.5, 0]} scale={scale}>
+        <mesh castShadow ref={sphereRef} position={[-2, -0.5, 0]} scale={1}>
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial color='hotpink' />
           <Html
@@ -103,14 +105,9 @@ function Experience() {
         {/* </PivotControls> */}
         {/* <TransformControls object={sphereRef} mode='translate' /> */}
 
-        <mesh
-          ref={cubeRef}
-          position={[position.x, position.y, position.z]}
-          visible={visible}
-          castShadow
-        >
+        <mesh ref={cubeRef} position={[1, 1, 1]} castShadow>
           <boxGeometry scale={1.5} />
-          <meshStandardMaterial color={color} />
+          <meshStandardMaterial color={'red'} />
         </mesh>
         {/* <TransformControls object={cubeRef} mode='rotate' /> */}
       </group>
