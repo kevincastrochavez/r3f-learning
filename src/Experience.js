@@ -18,7 +18,14 @@ function Experience() {
       <ambientLight intensity={0.5} />
 
       <group>
-        <PivotControls anchor={[0, 0, 0]} depthTest={false}>
+        <PivotControls
+          anchor={[0, 0, 0]}
+          depthTest={false}
+          lineWidth={2}
+          axisColors={[0xff0000, 0x00ff00, 0x0000ff]}
+          scale={2}
+          // fixed
+        >
           <mesh ref={sphereRef} position={[-2, -0.5, 0]}>
             <sphereGeometry args={[0.5, 32, 32]} />
             <meshStandardMaterial wireframe color='hotpink' />
