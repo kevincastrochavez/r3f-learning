@@ -1,10 +1,13 @@
 import React, { useRef } from 'react';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, TransformControls } from '@react-three/drei';
 
 function Experience() {
+  const cubeRef = useRef();
+
   return (
     <>
-      <OrbitControls />
+      <OrbitControls makeDefault />
+      {/* makeDefault for TransformControls so that the camera does not move when playing around */}
 
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={0.5} />
@@ -15,10 +18,11 @@ function Experience() {
           <meshStandardMaterial wireframe color='hotpink' />
         </mesh>
 
-        <mesh position={[2, -0.5, 0]}>
+        <mesh ref={cubeRef} position={[2, -0.5, 0]}>
           <boxGeometry scale={1.5} />
           <meshStandardMaterial color='purple' />
         </mesh>
+        <TransformControls object={cubeRef} />
       </group>
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
