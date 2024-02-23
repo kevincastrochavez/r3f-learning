@@ -9,10 +9,15 @@ import {
   MeshReflectorMaterial,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
+import { Perf } from 'r3f-perf';
 
 function Experience() {
   const cubeRef = useRef();
   const sphereRef = useRef();
+
+  const { perfVisible } = useControls({
+    perfVisible: true,
+  });
 
   // Every time a value change, it will rerender this component
   const { position, color, visible } = useControls('cube', {
@@ -48,6 +53,8 @@ function Experience() {
 
   return (
     <>
+      {perfVisible && <Perf position='top-left' />}
+
       <OrbitControls makeDefault />
       {/* makeDefault for TransformControls so that the camera does not move when playing  around */}
 
@@ -100,11 +107,11 @@ function Experience() {
         />
       </mesh>
 
-      <Float speed={5} floatIntensity={2}>
+      {/* <Float speed={5} floatIntensity={2}>
         <Text color={'salmon'} position-y={2} maxWidth={2} textAlign='center'>
           Hello There
         </Text>
-      </Float>
+      </Float> */}
     </>
   );
 }
