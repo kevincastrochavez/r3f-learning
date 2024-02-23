@@ -35,6 +35,7 @@ function Experience() {
               position={[0, 1, 0]}
               center
               distanceFactor={6}
+              occlude={[sphereRef, cubeRef]} // the sphere and cube will be occluded by the HTML
             >
               This is a Sphere
             </Html>
