@@ -8,6 +8,7 @@ import {
   Float,
   MeshReflectorMaterial,
   useHelper,
+  BakeShadows,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -28,7 +29,7 @@ function Experience() {
     // color: '#ff0000',
     position: {
       // value: 3,
-      value: { x: -2, y: 0, z: 0 },
+      value: { x: 2, y: 0, z: 0 },
       // min: -4,
       // max: 4,
       step: 0.01,
@@ -58,6 +59,7 @@ function Experience() {
   return (
     <>
       {perfVisible && <Perf position='top-left' />}
+      <BakeShadows />
 
       <OrbitControls makeDefault />
       {/* makeDefault for TransformControls so that the camera does not move when playing  around */}
@@ -66,53 +68,68 @@ function Experience() {
         ref={directionalLightRef}
         position={[1, 2, 3]}
         intensity={4.5}
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+        shadow-camera-top={5}
+        shadow-camera-right={5}
+        shadow-camera-bottom={-5}
+        shadow-camera-left={-5}
+        shadow-camera-far={10}
+        shadow-camera-near={1}
       />
       <ambientLight intensity={0.5} />
 
       <group>
-        <PivotControls
+        {/* <PivotControls
           anchor={[0, 0, 0]}
           depthTest={false}
           lineWidth={2}
           axisColors={[0xff0000, 0x00ff00, 0x0000ff]}
           scale={2}
-        >
-          <mesh ref={sphereRef} position={[-2, -0.5, 0]} scale={scale}>
-            <sphereGeometry args={[0.5, 32, 32]} />
-            <meshStandardMaterial wireframe color='hotpink' />
-            <Html
-              wrapperClass='label'
-              position={[0, 1, 0]}
-              center
-              distanceFactor={6}
-              occlude={[sphereRef, cubeRef]} // the sphere and cube will be occluded by the HTML
-            >
-              This is a Sphere
-            </Html>
-          </mesh>
-        </PivotControls>
+        > */}
+        <mesh castShadow ref={sphereRef} position={[-2, -0.5, 0]} scale={scale}>
+          <sphereGeometry args={[0.5, 32, 32]} />
+          <meshStandardMaterial color='hotpink' />
+          <Html
+            wrapperClass='label'
+            position={[0, 1, 0]}
+            center
+            distanceFactor={6}
+            occlude={[sphereRef, cubeRef]} // the sphere and cube will be occluded by the HTML
+          >
+            This is a Sphere
+          </Html>
+        </mesh>
+        {/* </PivotControls> */}
         {/* <TransformControls object={sphereRef} mode='translate' /> */}
 
         <mesh
           ref={cubeRef}
           position={[position.x, position.y, position.z]}
           visible={visible}
+          castShadow
         >
           <boxGeometry scale={1.5} />
           <meshStandardMaterial color={color} />
         </mesh>
-        <TransformControls object={cubeRef} mode='rotate' />
+        {/* <TransformControls object={cubeRef} mode='rotate' /> */}
       </group>
 
-      <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
+      <mesh
+        receiveShadow
+        position-y={-1}
+        rotation-x={-Math.PI * 0.5}
+        scale={10}
+      >
         <planeGeometry args={[1, 1]} />
-        <MeshReflectorMaterial
+        <meshStandardMaterial color={'greenyellow'} />
+        {/* <MeshReflectorMaterial
           resolution={512}
           blur={[1000, 1000]}
           mixBlur={1}
           mirror={1}
           color={'greenyellow'}
-        />
+        /> */}
       </mesh>
 
       {/* <Float speed={5} floatIntensity={2}>

@@ -13,13 +13,14 @@ function Object3d() {
 
   return (
     <Canvas
+      shadows
       gl={{
         toneMapping: THREE.ACESFilmicToneMapping,
         outputColorSpace: THREE.SRGBColorSpace,
       }}
       camera={cameraSettings}
     >
-      <color attach='background' args={['#ff0000']} />
+      <color attach='background' args={['ivory']} />
       <Experience />
     </Canvas>
   );
