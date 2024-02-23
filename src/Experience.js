@@ -10,6 +10,8 @@ import {
   useHelper,
   BakeShadows,
   SoftShadows,
+  RandomizedLight,
+  AccumulativeShadows,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -19,7 +21,7 @@ function Experience() {
   const cubeRef = useRef();
   const sphereRef = useRef();
   const directionalLightRef = useRef();
-  useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
+  // useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
 
   // const { perfVisible } = useControls({
   //   perfVisible: true,
@@ -61,7 +63,24 @@ function Experience() {
     <>
       {/* {perfVisible && <Perf position='top-left' />} */}
       {/* <BakeShadows /> */}
-      <SoftShadows size={50} samples={10} frustum={3.75} rings={11} near={9} />
+      {/* <SoftShadows size={50} samples={10} frustum={3.75} rings={11} near={9} /> */}
+      <AccumulativeShadows
+        position={[0, -0.99, 0]}
+        scale={10}
+        color='#316d39'
+        opacity={0.8}
+        frames={100}
+        temporal
+      >
+        <RandomizedLight
+          position={[1, 2, 3]}
+          amount={8}
+          radius={1}
+          ambient={0.5}
+          bias={0.001}
+          intensity={1}
+        />
+      </AccumulativeShadows>
 
       <OrbitControls makeDefault />
       {/* makeDefault for TransformControls so that the camera does not move when playing  around */}
@@ -112,12 +131,7 @@ function Experience() {
         {/* <TransformControls object={cubeRef} mode='rotate' /> */}
       </group>
 
-      <mesh
-        receiveShadow
-        position-y={-1}
-        rotation-x={-Math.PI * 0.5}
-        scale={10}
-      >
+      <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry args={[1, 1]} />
         <meshStandardMaterial color={'greenyellow'} />
         {/* <MeshReflectorMaterial
