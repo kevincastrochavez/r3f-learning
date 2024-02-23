@@ -6,6 +6,7 @@ import {
   Text,
   TransformControls,
   Float,
+  MeshReflectorMaterial,
 } from '@react-three/drei';
 
 function Experience() {
@@ -54,7 +55,14 @@ function Experience() {
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry args={[1, 1]} />
-        <meshStandardMaterial color='green' />
+        {/* <meshStandardMaterial color='green' /> */}
+        <MeshReflectorMaterial
+          resolution={512}
+          blur={[1000, 1000]}
+          mixBlur={1}
+          mirror={1}
+          color={'greenyellow'}
+        />
       </mesh>
 
       <Float speed={5} floatIntensity={2}>
