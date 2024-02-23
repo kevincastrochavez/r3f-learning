@@ -5,6 +5,7 @@ import {
   PivotControls,
   Text,
   TransformControls,
+  Float,
 } from '@react-three/drei';
 
 function Experience() {
@@ -56,9 +57,11 @@ function Experience() {
         <meshStandardMaterial color='green' />
       </mesh>
 
-      <Text color={'salmon'} position-y={2} maxWidth={2} textAlign='center'>
-        Hello There
-      </Text>
+      <Float speed={5} floatIntensity={2}>
+        <Text color={'salmon'} position-y={2} maxWidth={2} textAlign='center'>
+          Hello There
+        </Text>
+      </Float>
       {/* <Custom /> */}
     </>
   );
