@@ -3,6 +3,7 @@ import {
   Html,
   OrbitControls,
   PivotControls,
+  Text,
   TransformControls,
 } from '@react-three/drei';
 
@@ -55,6 +56,9 @@ function Experience() {
         <meshStandardMaterial color='green' />
       </mesh>
 
+      <Text color={'salmon'} position-y={2} maxWidth={2} textAlign='center'>
+        Hello There
+      </Text>
       {/* <Custom /> */}
     </>
   );
