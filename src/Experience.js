@@ -7,13 +7,17 @@ import {
   TransformControls,
   Float,
   MeshReflectorMaterial,
+  useHelper,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
+import * as THREE from 'three';
 
 function Experience() {
   const cubeRef = useRef();
   const sphereRef = useRef();
+  const directionalLightRef = useRef();
+  useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
 
   const { perfVisible } = useControls({
     perfVisible: true,
@@ -58,7 +62,11 @@ function Experience() {
       <OrbitControls makeDefault />
       {/* makeDefault for TransformControls so that the camera does not move when playing  around */}
 
-      <directionalLight position={[1, 2, 3]} intensity={4.5} />
+      <directionalLight
+        ref={directionalLightRef}
+        position={[1, 2, 3]}
+        intensity={4.5}
+      />
       <ambientLight intensity={0.5} />
 
       <group>
