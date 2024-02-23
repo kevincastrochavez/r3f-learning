@@ -8,10 +8,43 @@ import {
   Float,
   MeshReflectorMaterial,
 } from '@react-three/drei';
+import { useControls, button } from 'leva';
 
 function Experience() {
   const cubeRef = useRef();
   const sphereRef = useRef();
+
+  // Every time a value change, it will rerender this component
+  const { position, color, visible } = useControls('cube', {
+    // color: '#ff0000',
+    position: {
+      // value: 3,
+      value: { x: -2, y: 0, z: 0 },
+      // min: -4,
+      // max: 4,
+      step: 0.01,
+      joystick: 'invertY',
+    },
+    color: 'red',
+    visible: true,
+    myInterval: {
+      min: 0,
+      max: 100,
+      value: [4, 30],
+    },
+    clickMe: button(() => {
+      console.log('clicked');
+    }),
+    choice: {
+      options: ['a', 'b', 'c'],
+    },
+    // rotation: { x: 0, y: 0, z: 0 },
+    // scale: 1,
+  });
+
+  const { scale } = useControls('sphere', {
+    scale: 1,
+  });
 
   return (
     <>
@@ -28,9 +61,8 @@ function Experience() {
           lineWidth={2}
           axisColors={[0xff0000, 0x00ff00, 0x0000ff]}
           scale={2}
-          // fixed
         >
-          <mesh ref={sphereRef} position={[-2, -0.5, 0]}>
+          <mesh ref={sphereRef} position={[-2, -0.5, 0]} scale={scale}>
             <sphereGeometry args={[0.5, 32, 32]} />
             <meshStandardMaterial wireframe color='hotpink' />
             <Html
@@ -46,16 +78,19 @@ function Experience() {
         </PivotControls>
         {/* <TransformControls object={sphereRef} mode='translate' /> */}
 
-        <mesh ref={cubeRef} position={[2, -0.5, 0]}>
+        <mesh
+          ref={cubeRef}
+          position={[position.x, position.y, position.z]}
+          visible={visible}
+        >
           <boxGeometry scale={1.5} />
-          <meshStandardMaterial color='purple' />
+          <meshStandardMaterial color={color} />
         </mesh>
         <TransformControls object={cubeRef} mode='rotate' />
       </group>
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry args={[1, 1]} />
-        {/* <meshStandardMaterial color='green' /> */}
         <MeshReflectorMaterial
           resolution={512}
           blur={[1000, 1000]}
@@ -70,7 +105,6 @@ function Experience() {
           Hello There
         </Text>
       </Float>
-      {/* <Custom /> */}
     </>
   );
 }
