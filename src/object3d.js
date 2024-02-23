@@ -11,11 +11,6 @@ function Object3d() {
     position: [3, 2, 6],
   };
 
-  const onCreate = ({ gl }) => {
-    gl.setClearColor('#ff0000', 1);
-    // Used to set background color in Canvas and not in DOM
-  };
-
   return (
     <Canvas
       gl={{
@@ -23,8 +18,8 @@ function Object3d() {
         outputColorSpace: THREE.SRGBColorSpace,
       }}
       camera={cameraSettings}
-      onCreated={onCreate}
     >
+      <color attach='background' args={['#ff0000']} />
       <Experience />
     </Canvas>
   );
