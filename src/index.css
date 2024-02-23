@@ -10,3 +10,15 @@ body,
   width: 100%;
   overflow: hidden;
 }
+
+.label div {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  position: absolute;
+  background: #00000088;
+  white-space: nowrap;
+  padding: 15px;
+  color: #fff;
+  overflow: hidden;
+  border-radius: 30px;
+  user-select: none;
+}

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import {
+  Html,
   OrbitControls,
   PivotControls,
   TransformControls,
@@ -29,6 +30,14 @@ function Experience() {
           <mesh ref={sphereRef} position={[-2, -0.5, 0]}>
             <sphereGeometry args={[0.5, 32, 32]} />
             <meshStandardMaterial wireframe color='hotpink' />
+            <Html
+              wrapperClass='label'
+              position={[0, 1, 0]}
+              center
+              distanceFactor={6}
+            >
+              This is a Sphere
+            </Html>
           </mesh>
         </PivotControls>
         {/* <TransformControls object={sphereRef} mode='translate' /> */}
