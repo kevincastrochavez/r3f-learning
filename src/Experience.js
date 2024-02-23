@@ -12,6 +12,7 @@ import {
   SoftShadows,
   RandomizedLight,
   AccumulativeShadows,
+  Sky,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -99,6 +100,8 @@ function Experience() {
         shadow-camera-near={1}
       />
       <ambientLight intensity={0.5} />
+
+      <Sky sunPosition={[1, 2, 3]} />
 
       <group>
         {/* <PivotControls
