@@ -14,6 +14,7 @@ import {
   AccumulativeShadows,
   Sky,
   Environment,
+  Stage,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -63,7 +64,7 @@ function Experience() {
 
   return (
     <>
-      <Environment
+      {/* <Environment
         // files={[
         //   './environmentMaps/2/px.jpg',
         //   './environmentMaps/2/nx.jpg',
@@ -80,7 +81,7 @@ function Experience() {
           <planeGeometry />
           <meshBasicMaterial color={[1, 0, 0]} />
         </mesh>
-      </Environment>
+      </Environment> */}
 
       {/* {perfVisible && <Perf position='top-left' />} */}
       {/* <BakeShadows /> */}
@@ -103,7 +104,6 @@ function Experience() {
         />
       </AccumulativeShadows> */}
 
-      <OrbitControls makeDefault />
       {/* makeDefault for TransformControls so that the camera does not move when playing  around */}
 
       {/* <directionalLight
@@ -118,59 +118,73 @@ function Experience() {
         shadow-camera-left={-5}
         shadow-camera-far={10}
         shadow-camera-near={1}
-      />
+        />
       <ambientLight intensity={0.5} /> */}
 
       {/* <Sky sunPosition={[1, 2, 3]} /> */}
 
-      <group>
-        {/* <PivotControls
+      {/* <group> */}
+      {/* <PivotControls
           anchor={[0, 0, 0]}
           depthTest={false}
           lineWidth={2}
           axisColors={[0xff0000, 0x00ff00, 0x0000ff]}
           scale={2}
         > */}
-        <mesh castShadow ref={sphereRef} position={[-2, -0.5, 0]} scale={1}>
+      {/* <mesh castShadow ref={sphereRef} position={[-2, -0.5, 0]} scale={1}>
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial color='hotpink' envMapIntensity={3.5} />
           <Html
-            wrapperClass='label'
-            position={[0, 1, 0]}
-            center
-            distanceFactor={6}
-            occlude={[sphereRef, cubeRef]} // the sphere and cube will be occluded by the HTML
+          wrapperClass='label'
+          position={[0, 1, 0]}
+          center
+          distanceFactor={6}
+          occlude={[sphereRef, cubeRef]} // the sphere and cube will be occluded by the HTML
           >
-            This is a Sphere
+          This is a Sphere
           </Html>
-        </mesh>
-        {/* </PivotControls> */}
-        {/* <TransformControls object={sphereRef} mode='translate' /> */}
-
+        </mesh> */}
+      {/* </PivotControls> */}
+      {/* <TransformControls object={sphereRef} mode='translate' /> */}
+      {/* 
         <mesh ref={cubeRef} position={[1, 1, 1]} castShadow>
-          <boxGeometry scale={1.5} />
-          <meshStandardMaterial color={'red'} envMapIntensity={3.5} />
-        </mesh>
-        {/* <TransformControls object={cubeRef} mode='rotate' /> */}
-      </group>
+        <boxGeometry scale={1.5} />
+        <meshStandardMaterial color={'red'} envMapIntensity={3.5} />
+      </mesh> */}
+      {/* <TransformControls object={cubeRef} mode='rotate' /> */}
+      {/* </group> */}
 
-      <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
+      {/* <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry args={[1, 1]} envMapIntensity={3.5} />
-        <meshStandardMaterial color={'greenyellow'} />
-        {/* <MeshReflectorMaterial
+      <meshStandardMaterial color={'greenyellow'} /> */}
+      {/* <MeshReflectorMaterial
           resolution={512}
           blur={[1000, 1000]}
           mixBlur={1}
           mirror={1}
           color={'greenyellow'}
         /> */}
-      </mesh>
+      {/* </mesh> */}
 
       {/* <Float speed={5} floatIntensity={2}>
         <Text color={'salmon'} position-y={2} maxWidth={2} textAlign='center'>
-          Hello There
+        Hello There
         </Text>
       </Float> */}
+
+      <OrbitControls makeDefault />
+
+      <Stage>
+        <mesh castShadow ref={sphereRef} position={[-2, 0.1, 0]} scale={1}>
+          <sphereGeometry args={[0.5, 32, 32]} />
+          <meshStandardMaterial color='hotpink' envMapIntensity={3.5} />
+        </mesh>
+
+        <mesh ref={cubeRef} position={[1, 0.1, 0]} castShadow>
+          <boxGeometry scale={1.5} />
+          <meshStandardMaterial color={'red'} envMapIntensity={3.5} />
+        </mesh>
+      </Stage>
     </>
   );
 }
