@@ -14,6 +14,7 @@ function Object3d() {
 
   return (
     <Canvas
+      flat
       shadows
       gl={{
         toneMapping: THREE.ACESFilmicToneMapping,
