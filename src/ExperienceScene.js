@@ -6,6 +6,7 @@ import {
   Center,
   Sparkles,
 } from '@react-three/drei';
+import { Perf } from 'r3f-perf';
 
 function ExperienceScene() {
   const { nodes } = useGLTF('./model/portal.glb');
@@ -14,6 +15,8 @@ function ExperienceScene() {
 
   return (
     <>
+      <Perf position='top-left' />
+
       <OrbitControls makeDefault />
 
       <Center>
