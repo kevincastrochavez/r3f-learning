@@ -1,15 +1,18 @@
 import React, { useRef } from 'react';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls, useGLTF, useTexture } from '@react-three/drei';
 
 function ExperienceScene() {
   const { nodes } = useGLTF('./model/portal.glb');
-  console.log(nodes);
+  const bakedTexture = useTexture('./model/baked.jpg');
+  bakedTexture.flipY = false;
 
   return (
     <>
       <OrbitControls makeDefault />
 
-      <mesh geometry={nodes.baked.geometry} />
+      <mesh geometry={nodes.baked.geometry}>
+        <meshBasicMaterial map={bakedTexture} />
+      </mesh>
     </>
   );
 }
