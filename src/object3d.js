@@ -2,6 +2,7 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Experience from './Experience';
 import * as THREE from 'three';
+import ExperienceScene from './ExperienceScene';
 
 function Object3d() {
   const cameraSettings = {
@@ -20,8 +21,9 @@ function Object3d() {
       }}
       camera={cameraSettings}
     >
-      <color attach='background' args={['ivory']} />
-      <Experience />
+      <color attach='background' args={['#030202']} />
+      {/* <Experience /> */}
+      <ExperienceScene />
     </Canvas>
   );
 }
