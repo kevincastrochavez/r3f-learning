@@ -1,5 +1,11 @@
 import React, { useRef } from 'react';
-import { OrbitControls, useGLTF, useTexture, Center } from '@react-three/drei';
+import {
+  OrbitControls,
+  useGLTF,
+  useTexture,
+  Center,
+  Sparkles,
+} from '@react-three/drei';
 
 function ExperienceScene() {
   const { nodes } = useGLTF('./model/portal.glb');
@@ -39,6 +45,14 @@ function ExperienceScene() {
           rotation={nodes.portalLight.rotation}
           scale={nodes.portalLight.scale}
         ></mesh>
+
+        <Sparkles
+          size={6}
+          scale={[4, 2, 4]}
+          position-y={1}
+          speed={0.4}
+          count={40}
+        />
       </Center>
     </>
   );
