@@ -13,6 +13,7 @@ import {
   RandomizedLight,
   AccumulativeShadows,
   Sky,
+  Environment,
 } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -62,10 +63,29 @@ function Experience() {
 
   return (
     <>
+      <Environment
+        // files={[
+        //   './environmentMaps/2/px.jpg',
+        //   './environmentMaps/2/nx.jpg',
+        //   './environmentMaps/2/py.jpg',
+        //   './environmentMaps/2/ny.jpg',
+        //   './environmentMaps/2/pz.jpg',
+        //   './environmentMaps/2/nz.jpg',
+        // ]}
+        // files={'./environmentMaps/the_sky_is_on_fire_2k.hdr'}
+        background
+        // preset='sunset'
+      >
+        <mesh position-z={-5} scale={10}>
+          <planeGeometry />
+          <meshBasicMaterial color={[1, 0, 0]} />
+        </mesh>
+      </Environment>
+
       {/* {perfVisible && <Perf position='top-left' />} */}
       {/* <BakeShadows /> */}
       {/* <SoftShadows size={50} samples={10} frustum={3.75} rings={11} near={9} /> */}
-      <AccumulativeShadows
+      {/* <AccumulativeShadows
         position={[0, -0.99, 0]}
         scale={10}
         color='#316d39'
@@ -81,12 +101,12 @@ function Experience() {
           bias={0.001}
           intensity={1}
         />
-      </AccumulativeShadows>
+      </AccumulativeShadows> */}
 
       <OrbitControls makeDefault />
       {/* makeDefault for TransformControls so that the camera does not move when playing  around */}
 
-      <directionalLight
+      {/* <directionalLight
         ref={directionalLightRef}
         position={[1, 2, 3]}
         intensity={4.5}
@@ -99,9 +119,9 @@ function Experience() {
         shadow-camera-far={10}
         shadow-camera-near={1}
       />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.5} /> */}
 
-      <Sky sunPosition={[1, 2, 3]} />
+      {/* <Sky sunPosition={[1, 2, 3]} /> */}
 
       <group>
         {/* <PivotControls
@@ -113,7 +133,7 @@ function Experience() {
         > */}
         <mesh castShadow ref={sphereRef} position={[-2, -0.5, 0]} scale={1}>
           <sphereGeometry args={[0.5, 32, 32]} />
-          <meshStandardMaterial color='hotpink' />
+          <meshStandardMaterial color='hotpink' envMapIntensity={3.5} />
           <Html
             wrapperClass='label'
             position={[0, 1, 0]}
@@ -129,13 +149,13 @@ function Experience() {
 
         <mesh ref={cubeRef} position={[1, 1, 1]} castShadow>
           <boxGeometry scale={1.5} />
-          <meshStandardMaterial color={'red'} />
+          <meshStandardMaterial color={'red'} envMapIntensity={3.5} />
         </mesh>
         {/* <TransformControls object={cubeRef} mode='rotate' /> */}
       </group>
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
-        <planeGeometry args={[1, 1]} />
+        <planeGeometry args={[1, 1]} envMapIntensity={3.5} />
         <meshStandardMaterial color={'greenyellow'} />
         {/* <MeshReflectorMaterial
           resolution={512}
