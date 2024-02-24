@@ -1,15 +1,15 @@
 import React, { useRef } from 'react';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 
 function ExperienceScene() {
+  const { nodes } = useGLTF('./model/portal.glb');
+  console.log(nodes);
+
   return (
     <>
       <OrbitControls makeDefault />
 
-      <mesh scale={1.5}>
-        <boxGeometry />
-        <meshNormalMaterial />
-      </mesh>
+      <mesh geometry={nodes.baked.geometry} />
     </>
   );
 }
